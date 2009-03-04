@@ -3,4 +3,26 @@
 Como Se Dice es una aplicación web desarrollada para la cuarta edición del concurso organizado por Open Móvil Fórum (http://open.movilforum.com/concurso/4). La aplicación básicamente se podría definir como un traductor via sms, ya que la aplicación permite enviar mensajes de móvil a un número de teléfono dado con el texto que se desee traducir y el idioma destino y al instante se recibirá un mensaje de vuelta con el texto traducido. 
 
 
+= Requerimientos =
+
+La aplicación es accesible desde la web http://comosedice.frangarcia.net, pero también puedes instalarla en tu propio servidor. Sólo tienes que descargarte la aplicación desde la dirección http://comosedice.googlecode.com/files/comosedice.zip y seguir las instrucciones del siguiente punto. Pero antes de eso, dejame comentarte los requisitos mínimos para que tu aplicación funcione correctamente.
+
+Necesitas de un servidor Apache que haga las funciones de servidor web. Puedes utilizar una instalación de xampp que puedes obtener desde la web de Apache friends (http://www.apachefriends.org/en/xampp.html). Un segundo requisito es que tu servidor web pueda interpretar archivos php. Si optas por utilizar xampp, este requisito lo tienes solventado. Por último, necesitarás tener acceso a una base de datos de tipo MySQL, y como antes, esto lo tienes con xampp. Resumiendo, si empiezas desde cero, te aconsejo que utilices xampp y tendrás un todo en uno.
+
+
 = Instalación =
+
+Si ya te has descargado la aplicación, ahora vamos a instalarla. En primer lugar, vamos a configurar la base de datos. Para ello vamos a crear una base de datos utilizando por ejemplo una interfaz como phpMyAdmin. Si has instalado xampp, podrás acceder desde http://localhost/phpMyADmin y desde ahí, crear una base de datos con el nombre que quieras, ¿qué te parece el nombre comosedice?
+
+Una vez creada la base de datos, necesitamos de un usuario que tenga acceso a dicha base de datos. Vamos a crear un usuario con permisos de SELECT, INSERT, UPDATE y DELETE. Al usuario le podemos poner el nombre user_comosedice y la contraseña, te la dejo a tu elección, pero no la olvides, porque la necesitaremos más adelante.
+
+El siguiente paso consite en importar la base de datos. Para ello y utilizando también phpMyAdmin, importamos el fichero sql llamado sql/comosedice.sql. Ahora si, ya tendremos importada la estructura de la base de datos.
+
+Con esto, el tema de la base de datos ya la tenemos finiquitada, ahora vamos a configurar nuestra aplicación para que pueda interactuar con la base de datos. Para ello, si ya hemos descomprimido la aplicación, tienes que editar el archivo lib/database.php y poner los datos de acceso a la base de datos que acabamos de crear:
+
+$dbhost = "localhost";
+$dbname = "comosedice";
+$dbuser = "user_comosedice";
+$dbpass = "laquetumismohayaselegido";
+
+El resto del fichero, no tienes que tocarlo.
