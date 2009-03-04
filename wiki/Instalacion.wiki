@@ -1,11 +1,6 @@
 = ¿Qué es Como Se Dice? =
 
-Add your content here.
+Como Se Dice es una aplicación web desarrollada para la cuarta edición del concurso organizado por Open Móvil Fórum (http://open.movilforum.com/concurso/4). La aplicación básicamente se podría definir como un traductor via sms, ya que la aplicación permite enviar mensajes de móvil a un número de teléfono dado con el texto que se desee traducir y el idioma destino y al instante se recibirá un mensaje de vuelta con el texto traducido. 
 
 
 = Instalación =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
