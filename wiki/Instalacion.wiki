@@ -21,8 +21,30 @@ El siguiente paso consite en importar la base de datos. Para ello y utilizando t
 Con esto, el tema de la base de datos ya la tenemos finiquitada, ahora vamos a configurar nuestra aplicación para que pueda interactuar con la base de datos. Para ello, si ya hemos descomprimido la aplicación, tienes que editar el archivo lib/database.php y poner los datos de acceso a la base de datos que acabamos de crear:
 
 $dbhost = "localhost";
+
 $dbname = "comosedice";
+
 $dbuser = "user_comosedice";
+
 $dbpass = "laquetumismohayaselegido";
 
-El resto del fichero, no tienes que tocarlo.
+
+El resto del fichero, déjalo intacto.
+
+Ahora sólo nos queda configurar el número de teléfono al cual los usuarios deberán mandar los mensajes. Como te decía antes, este proyecto forma parte de un concurso organizado por Open Móvil Fórum, quien dispone de una serie de librerías y apis que nos permitirán conseguir el objetivo de la aplicación. He de comentarte que la aplicación funciona de la siguiente manera. Todos los mensajes recibidos en un número de móvil, son redireccionados a un correo electrónico que es constantemente analizado en busca de peticiones de los usuarios.
+
+Para conseguir este número de teléfono redireccionado a un correo electrónico, puedes mandar un sms al número +34638444900 con el texto ALTA tucorreo@electronico.com, y al instante recibirás un sms de confirmación indicándote tu número de móvil ficticio. De esta forma, cualquier persona que mande un sms a ese número de móvil, te llegará al mail que le has indicado. Te aconsejo que utilices una cuenta de correo electrónico nueva, y te aconsejo aún más, que te la crees con gmail.
+
+Una vez obtenido este número de móvil, tendrás que editar el archivo lib/conf.php para indicarle a la aplicación los datos del correo electrónico que está recibiendo los mensajes de los usuarios que quieren traducir sus textos. Estos datos serán:
+
+$imap_connection_mail = "tucorreo@gmail.com";
+
+$imap_connection_pwd = "tucontraseñadelcorreo";
+
+Ya llevamos mucho tiempo configurando la aplicación. Lo sé, pero es que la aplicación es la caña y es necesario hacer esto para que todo funcione correctamente. Pero tranquilo, ya queda poco, yo diría que apenas nada.
+
+Como te comentaba antes, la aplicación mandará un sms de vuelta a los usuarios que nos manden sus peticiones. En mi aplicación, el primer mensaje mandado cada día desde un número de móvil, el mensaje de vuelta será gratuíto para el usuario. Sin embargo, a partir del segundo es necesario que el usuario se registre, porque será a él a quien se le facture este mensaje. Para ello, sólo tiene que mandar un mensaje al 770 con la contraseña que desee utilizar (al menos 6 caracteres).
+
+Puedes elegir si el primer mensaje mandado es gratuito o no, editando el archivo lib/conf.php y modificando el valor de la variable $first_message_free. Si lo dejas en true, necesitarás un número de móvil y una contraseña a la cual se facturarán dichos mensajes. Para ello, tú mismo, deberás darte de alta en el servicio 770 tal y como te explicaba anteriormente.
+
+Bueno, y con esto, terminamos la explicación sobre como instalar nuestra propia aplicación en nuestro servidor. Puedes cambiar lo que quieras, por supuesto, siempre haciendo referencia al proyecto original. Sé honesto con quien ha hecho el proyecto en realidad. ¿Te gustaría que te lo hicieran a ti?
