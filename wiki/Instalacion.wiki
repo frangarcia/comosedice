@@ -48,3 +48,11 @@ Como te comentaba antes, la aplicación mandará un sms de vuelta a los usuarios
 Puedes elegir si el primer mensaje mandado es gratuito o no, editando el archivo lib/conf.php y modificando el valor de la variable $first_message_free. Si lo dejas en true, necesitarás un número de móvil y una contraseña a la cual se facturarán dichos mensajes. Para ello, tú mismo, deberás darte de alta en el servicio 770 tal y como te explicaba anteriormente.
 
 Bueno, y con esto, terminamos la explicación sobre como instalar nuestra propia aplicación en nuestro servidor. Puedes cambiar lo que quieras, por supuesto, siempre haciendo referencia al proyecto original. Sé honesto con quien ha hecho el proyecto en realidad. ¿Te gustaría que te lo hicieran a ti?
+
+= ¿Cómo está hecho? =
+
+El proyecto utiliza básicamente 3 apis, 2 de Open Móvil Fórum y una de Google Translation. La primera de ellas es la *SMS Reception API* (http://open.movilforum.com/node/250) de Open Móvil Fórum y cuya funcionalidad consiste en la posibilidad de redireccionar los mensajes de texto recibidos en un número de móvil en un correo electrónico. De esta forma, cada vez que un usuario mande un mensaje de texto a este número de móvil, dicho mensaje será redireccionado al correo electrónico dado, el cual puede ser analizado mediante un proceso para actuar en consecuencia.
+
+La segunda API utilizada es la *SMS Send* (http://open.movilforum.com/node/430) la cual permite el envio de SMS's mediante llamadas a procedimientos, siempre via web. Mediante esta API, la aplicación es capaz de responder al usuario con el texto traducido.
+
+Por último, se ha empleado también una API externa al concurso de Open Móvil Fórum que realiza la traducción automática del texto recibido. Esta API es una modificación de la proporcionada por Google Translation.
