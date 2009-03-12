@@ -56,9 +56,3 @@ El proyecto utiliza básicamente 3 apis, 2 de Open Móvil Fórum y una de Google
 La segunda API utilizada es la *SMS Send* (http://open.movilforum.com/node/430) la cual permite el envio de SMS's mediante llamadas a procedimientos, siempre via web. Mediante esta API, la aplicación es capaz de responder al usuario con el texto traducido.
 
 Por último, se ha empleado también una API externa al concurso de Open Móvil Fórum que realiza la traducción automática del texto recibido. Esta API es una modificación de la proporcionada por *Google Translation*.
-
-= Vídeo explicativo =
-
-He preparado un vídeo explicativo de la aplicación.
-
-<wiki:video url="http://www.frangarcia.net/txp/file_download/1/clockr.swf"/>
