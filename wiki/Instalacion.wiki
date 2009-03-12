@@ -61,4 +61,4 @@ Por último, se ha empleado también una API externa al concurso de Open Móvil 
 
 He preparado un vídeo explicativo de la aplicación.
 
-<wiki:video url="http://www.youtube.com/watch?v=3LkNlTNHZzE"/>
+<wiki:video url="http://www.frangarcia.net/txp/file_download/1/clockr.swf"/>
