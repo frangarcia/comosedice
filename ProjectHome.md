@@ -1,0 +1,1 @@
+Send an sms with a text you want translated and you'll got an sms with the translation of the text

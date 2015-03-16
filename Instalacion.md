@@ -1,0 +1,58 @@
+# ¿Qué es Como Se Dice? #
+
+Como Se Dice es una aplicación web desarrollada para la cuarta edición del concurso organizado por Open Móvil Fórum (http://open.movilforum.com/concurso/4). La aplicación básicamente se podría definir como un traductor via sms, ya que la aplicación permite enviar mensajes de móvil a un número de teléfono dado con el texto que se desee traducir y el idioma destino y al instante se recibirá un mensaje de vuelta con el texto traducido.
+
+
+# Requerimientos #
+
+La aplicación es accesible desde la web http://comosedice.frangarcia.net, pero también puedes instalarla en tu propio servidor. Sólo tienes que descargarte la aplicación desde la dirección http://comosedice.googlecode.com/files/comosedice.zip y seguir las instrucciones del siguiente punto. Pero antes de eso, dejame comentarte los requisitos mínimos para que tu aplicación funcione correctamente.
+
+Necesitas de un servidor Apache que haga las funciones de servidor web. Puedes utilizar una instalación de xampp que puedes obtener desde la web de Apache friends (http://www.apachefriends.org/en/xampp.html). Un segundo requisito es que tu servidor web pueda interpretar archivos php. Si optas por utilizar xampp, este requisito lo tienes solventado. Por último, necesitarás tener acceso a una base de datos de tipo MySQL, y como antes, esto lo tienes con xampp. Resumiendo, si empiezas desde cero, te aconsejo que utilices xampp y tendrás un todo en uno.
+
+
+# Instalación #
+
+Si ya te has descargado la aplicación, ahora vamos a instalarla. En primer lugar, vamos a configurar la base de datos. Para ello vamos a crear una base de datos utilizando por ejemplo una interfaz como phpMyAdmin. Si has instalado xampp, podrás acceder desde http://localhost/phpMyADmin y desde ahí, crear una base de datos con el nombre que quieras, ¿qué te parece el nombre comosedice?
+
+Una vez creada la base de datos, necesitamos de un usuario que tenga acceso a dicha base de datos. Vamos a crear un usuario con permisos de SELECT, INSERT, UPDATE y DELETE. Al usuario le podemos poner el nombre user\_comosedice y la contraseña, te la dejo a tu elección, pero no la olvides, porque la necesitaremos más adelante.
+
+El siguiente paso consite en importar la base de datos. Para ello y utilizando también phpMyAdmin, importamos el fichero sql llamado sql/comosedice.sql. Ahora si, ya tendremos importada la estructura de la base de datos.
+
+Con esto, el tema de la base de datos ya la tenemos finiquitada, ahora vamos a configurar nuestra aplicación para que pueda interactuar con la base de datos. Para ello, si ya hemos descomprimido la aplicación, tienes que editar el archivo lib/database.php y poner los datos de acceso a la base de datos que acabamos de crear:
+
+$dbhost = "localhost";
+
+$dbname = "comosedice";
+
+$dbuser = "user\_comosedice";
+
+$dbpass = "laquetumismohayaselegido";
+
+
+El resto del fichero, déjalo intacto.
+
+Ahora sólo nos queda configurar el número de teléfono al cual los usuarios deberán mandar los mensajes. Como te decía antes, este proyecto forma parte de un concurso organizado por Open Móvil Fórum, quien dispone de una serie de librerías y apis que nos permitirán conseguir el objetivo de la aplicación. He de comentarte que la aplicación funciona de la siguiente manera. Todos los mensajes recibidos en un número de móvil, son redireccionados a un correo electrónico que es constantemente analizado en busca de peticiones de los usuarios.
+
+Para conseguir este número de teléfono redireccionado a un correo electrónico, puedes mandar un sms al número +34638444900 con el texto ALTA tucorreo@electronico.com, y al instante recibirás un sms de confirmación indicándote tu número de móvil ficticio. De esta forma, cualquier persona que mande un sms a ese número de móvil, te llegará al mail que le has indicado. Te aconsejo que utilices una cuenta de correo electrónico nueva, y te aconsejo aún más, que te la crees con gmail.
+
+Una vez obtenido este número de móvil, tendrás que editar el archivo lib/conf.php para indicarle a la aplicación los datos del correo electrónico que está recibiendo los mensajes de los usuarios que quieren traducir sus textos. Estos datos serán:
+
+$imap\_connection\_mail = "tucorreo@gmail.com";
+
+$imap\_connection\_pwd = "tucontraseñadelcorreo";
+
+Ya llevamos mucho tiempo configurando la aplicación. Lo sé, pero es que la aplicación es la caña y es necesario hacer esto para que todo funcione correctamente. Pero tranquilo, ya queda poco, yo diría que apenas nada.
+
+Como te comentaba antes, la aplicación mandará un sms de vuelta a los usuarios que nos manden sus peticiones. En mi aplicación, el primer mensaje mandado cada día desde un número de móvil, el mensaje de vuelta será gratuíto para el usuario. Sin embargo, a partir del segundo es necesario que el usuario se registre, porque será a él a quien se le facture este mensaje. Para ello, sólo tiene que mandar un mensaje al 770 con la contraseña que desee utilizar (al menos 6 caracteres).
+
+Puedes elegir si el primer mensaje mandado es gratuito o no, editando el archivo lib/conf.php y modificando el valor de la variable $first\_message\_free. Si lo dejas en true, necesitarás un número de móvil y una contraseña a la cual se facturarán dichos mensajes. Para ello, tú mismo, deberás darte de alta en el servicio 770 tal y como te explicaba anteriormente.
+
+Bueno, y con esto, terminamos la explicación sobre como instalar nuestra propia aplicación en nuestro servidor. Puedes cambiar lo que quieras, por supuesto, siempre haciendo referencia al proyecto original. Sé honesto con quien ha hecho el proyecto en realidad. ¿Te gustaría que te lo hicieran a ti?
+
+# ¿Cómo está hecho? #
+
+El proyecto utiliza básicamente 3 apis, 2 de Open Móvil Fórum y una de Google Translation. La primera de ellas es la **SMS Reception API** (http://open.movilforum.com/node/250) de Open Móvil Fórum y cuya funcionalidad consiste en la posibilidad de redireccionar los mensajes de texto recibidos en un número de móvil en un correo electrónico. De esta forma, cada vez que un usuario mande un mensaje de texto a este número de móvil, dicho mensaje será redireccionado al correo electrónico dado, el cual puede ser analizado mediante un proceso para actuar en consecuencia.
+
+La segunda API utilizada es la **SMS Send** (http://open.movilforum.com/node/430) la cual permite el envio de SMS's mediante llamadas a procedimientos, siempre via web. Mediante esta API, la aplicación es capaz de responder al usuario con el texto traducido.
+
+Por último, se ha empleado también una API externa al concurso de Open Móvil Fórum que realiza la traducción automática del texto recibido. Esta API es una modificación de la proporcionada por **Google Translation**.
